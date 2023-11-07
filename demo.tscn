@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6n04p3dt7xss"]
+
+[ext_resource type="ArrayMesh" uid="uid://bqvk1xqw5iij2" path="res://model/bush-like.obj" id="1_4n8k3"]
+[ext_resource type="Shader" path="res://SimpleCheapStylizedFoliage.gdshader" id="2_5fk4i"]
+[ext_resource type="Texture2D" uid="uid://bwamaf0ti5tnw" path="res://texture/256b.png" id="3_ubfnl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_svf4h"]
+render_priority = 0
+shader = ExtResource("2_5fk4i")
+shader_parameter/foliage_colour = Color(0.513726, 0.901961, 0.733333, 1)
+shader_parameter/foliage_texture = ExtResource("3_ubfnl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lpj0g"]
+size = Vector2(32, 32)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kuyey"]
+albedo_color = Color(0.176471, 0.0862745, 0.027451, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Bush-like" type="MeshInstance3D" parent="."]
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, 0, 0, 0)
+mesh = ExtResource("1_4n8k3")
+surface_material_override/0 = SubResource("ShaderMaterial_svf4h")
+
+[node name="backdrop" type="Node3D" parent="."]
+
+[node name="bot-plane" type="MeshInstance3D" parent="backdrop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.28089, 0)
+mesh = SubResource("PlaneMesh_lpj0g")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kuyey")
+
+[node name="sidea" type="MeshInstance3D" parent="backdrop"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.8739, -1.28089, 0)
+mesh = SubResource("PlaneMesh_lpj0g")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kuyey")
+
+[node name="sideb" type="MeshInstance3D" parent="backdrop"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.28089, 13.4194)
+mesh = SubResource("PlaneMesh_lpj0g")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kuyey")
